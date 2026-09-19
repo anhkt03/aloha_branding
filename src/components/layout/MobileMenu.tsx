@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Logo } from "@/components/common/Logo";
 import { Button } from "@/components/common/Button";
@@ -26,23 +28,54 @@ export function MobileMenu({
   consultLabel,
   consultHref,
 }: MobileMenuProps) {
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Lock background scroll while the drawer is open.
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  // Close on Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!mounted) return null;
+
+  const overlay = (
     <div
-      className={cn("fixed inset-0 z-50 xl:hidden", !open && "pointer-events-none")}
+      className={cn("fixed inset-0 z-[100] xl:hidden", !open && "pointer-events-none")}
       aria-hidden={!open}
     >
+      {/* Backdrop */}
       <div
         className={cn(
-          "absolute inset-0 bg-black/40 transition-opacity",
+          "absolute inset-0 bg-black/50 transition-opacity duration-200",
           open ? "opacity-100" : "opacity-0",
         )}
         onClick={onClose}
       />
+
+      {/* Drawer */}
       <nav
         className={cn(
-          "absolute right-0 top-0 flex h-full w-80 max-w-[85%] flex-col bg-page p-6 shadow-xl transition-transform",
+          "absolute right-0 top-0 flex h-full w-80 max-w-[85%] flex-col bg-page shadow-xl transition-transform duration-200",
           open ? "translate-x-0" : "translate-x-full",
         )}
+        style={{
+          paddingTop: "calc(1.5rem + env(safe-area-inset-top, 0px))",
+          paddingBottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))",
+          paddingInline: "1.5rem",
+        }}
       >
         <div className="mb-6 flex items-center justify-between">
           <Logo size="sm" />
@@ -56,7 +89,7 @@ export function MobileMenu({
           </button>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 overflow-y-auto">
           {items.map((item) => (
             <Link
               key={item.key}
@@ -89,4 +122,6 @@ export function MobileMenu({
       </nav>
     </div>
   );
+
+  return createPortal(overlay, document.body);
 }
