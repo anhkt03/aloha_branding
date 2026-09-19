@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ALOHA design tokens — extracted from the canvas design
+   ============================================================ */
+@theme {
+  /* Brand green */
+  --color-brand: #128049;
+  --color-brand-dark: #0d6b3c;
+  --color-brand-deep: #0a4f2b;
+  --color-brand-emerald: #1e9e57;
+  --color-brand-tint: #e7f4ec;
+  --color-brand-tint-2: #d6ecdd;
+
+  /* Blue (study-abroad accent) */
+  --color-accent: #2e74c4;
+  --color-accent-light: #4a90d9;
+  --color-accent-dark: #1c4a80;
+  --color-accent-tint: #e8f1fb;
+  --color-accent-tint-2: #d5e6f8;
+
+  /* Amber (secondary journey card) */
+  --color-sand: #f7f0de;
+  --color-sand-ink: #5a4410;
+
+  /* Surfaces & neutrals */
+  --color-page: #ffffff;
+  --color-card: #ffffff;
+  --color-surface: #f4f8f5;
+  --color-ink: #16241c;
+  --color-ink-soft: #3a473f;
+  --color-muted: #52615a;
+  --color-muted-light: #7a897f;
+  --color-line: #e4eae5;
+  --color-line-strong: #ccd8d0;
+
+  /* Footer */
+  --color-footer: #0a1f14;
+  --color-footer-text: #9fb3a7;
+  --color-footer-dim: #7f9488;
+  --color-footer-accent: #7fc79a;
+
+  /* Fonts (wired to next/font CSS variables) */
+  --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+}
+
+/* ============================================================
+   Dark theme — overrides the token values so every utility
+   (bg-page, text-ink, bg-brand, …) flips automatically.
+   Applied when <html data-theme="dark"> is set by the toggle.
+   Brand/accent are brightened for contrast on dark surfaces.
+   ============================================================ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-brand: #23a663;
+  --color-brand-dark: #38ba78;
+  --color-brand-tint: #123329;
+  --color-brand-tint-2: #17402f;
+
+  --color-accent: #5199e6;
+  --color-accent-dark: #7cb2ec;
+  --color-accent-tint: #12283a;
+  --color-accent-tint-2: #173350;
+
+  --color-sand: #2a2417;
+  --color-sand-ink: #ecdcae;
+
+  --color-page: #0b1510;
+  --color-card: #13201a;
+  --color-surface: #0f1a14;
+  --color-ink: #eaf2ed;
+  --color-ink-soft: #c3d2ca;
+  --color-muted: #9aaea4;
+  --color-muted-light: #7a8e84;
+  --color-line: #22322a;
+  --color-line-strong: #2c3f35;
+}
+
+/* Base element styles live in @layer base so Tailwind utilities
+   (e.g. text-white on a link-button) always win. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Smooth the light/dark swap for surfaces, borders and text. */
+  body,
+  header,
+  section,
+  footer,
+  article,
+  input,
+  select,
+  textarea {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
