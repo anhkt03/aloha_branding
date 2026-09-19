@@ -33,8 +33,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const dict = await getDictionary(isLocale(locale) ? locale : "vi");
+
+  // siteConfig.url is already validated; guard once more so a bad value can
+  // never fail the production build.
+  let metadataBase: URL | undefined;
+  try {
+    metadataBase = new URL(siteConfig.url);
+  } catch {
+    metadataBase = undefined;
+  }
+
   return {
-    metadataBase: new URL(siteConfig.url),
+    metadataBase,
     title: {
       default: `${siteConfig.name} — ${dict.common.tagline}`,
       template: `%s | ${siteConfig.name}`,
