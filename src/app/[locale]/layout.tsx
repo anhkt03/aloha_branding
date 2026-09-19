@@ -62,10 +62,9 @@ export default async function LocaleLayout({
       className={`${beVietnam.variable} ${caveat.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body>
+        {/* Sets data-theme before first paint to avoid a flash of the wrong theme. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Header locale={typedLocale} nav={dict.nav} common={dict.common} />
         <main>{children}</main>
       </body>
