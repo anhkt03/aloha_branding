@@ -18,6 +18,7 @@ export const dictionary: Dictionary = {
     tagline: "More Languages · A Brighter You",
     breadcrumbHome: "Trang chủ",
     theme: "Chuyển giao diện sáng/tối",
+    scrollTop: "Lên đầu trang",
   },
   footer: {
     blurb:

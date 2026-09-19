@@ -18,6 +18,7 @@ export const dictionary: Dictionary = {
     tagline: "More Languages · A Brighter You",
     breadcrumbHome: "Home",
     theme: "Toggle light/dark theme",
+    scrollTop: "Back to top",
   },
   footer: {
     blurb: "Language training & study-abroad guidance helping the next generation reach further.",

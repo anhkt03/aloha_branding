@@ -32,6 +32,7 @@ export interface Dictionary {
     tagline: string; // "More Languages · A Brighter You"
     breadcrumbHome: string;
     theme: string; // aria-label for the light/dark toggle
+    scrollTop: string; // aria-label for the scroll-to-top button
   };
   footer: {
     blurb: string;

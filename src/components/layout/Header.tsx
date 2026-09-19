@@ -54,13 +54,13 @@ export function Header({ locale, nav, common }: HeaderProps) {
       <Container className="flex h-[76px] items-center gap-7">
         <Logo href={home} />
 
-        <nav className="ml-2 hidden items-center gap-6 lg:flex">
+        <nav className="ml-2 hidden items-center gap-5 xl:flex">
           {items.map((item) => (
             <Link
               key={item.key}
               href={item.href}
               className={cn(
-                "text-[15px] font-medium transition-colors hover:text-brand",
+                "whitespace-nowrap text-[15px] font-medium transition-colors hover:text-brand",
                 item.key === activeKey ? "font-semibold text-brand" : "text-ink-soft",
               )}
             >
@@ -69,10 +69,10 @@ export function Header({ locale, nav, common }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 sm:gap-4">
+        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-4">
           <a
             href={`tel:${common.phone.replace(/\s/g, "")}`}
-            className="hidden items-center gap-2 font-bold text-brand-dark md:flex"
+            className="hidden items-center gap-2 whitespace-nowrap font-bold text-brand-dark xl:flex"
           >
             <Icon name="phone" size={18} className="text-brand" />
             {common.phone}
@@ -90,7 +90,7 @@ export function Header({ locale, nav, common }: HeaderProps) {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
-            className="grid h-10 w-10 place-items-center rounded-full text-ink-soft hover:bg-surface lg:hidden"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-ink-soft hover:bg-surface xl:hidden"
           >
             <span className="text-xl">☰</span>
           </button>

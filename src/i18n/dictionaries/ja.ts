@@ -18,6 +18,7 @@ export const dictionary: Dictionary = {
     tagline: "More Languages · A Brighter You",
     breadcrumbHome: "ホーム",
     theme: "ライト/ダークを切り替え",
+    scrollTop: "トップへ戻る",
   },
   footer: {
     blurb: "次の世代がより遠くへ羽ばたくための語学トレーニングと留学サポート。",

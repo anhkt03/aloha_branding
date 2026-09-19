@@ -28,7 +28,7 @@ export function MobileMenu({
 }: MobileMenuProps) {
   return (
     <div
-      className={cn("fixed inset-0 z-50 lg:hidden", !open && "pointer-events-none")}
+      className={cn("fixed inset-0 z-50 xl:hidden", !open && "pointer-events-none")}
       aria-hidden={!open}
     >
       <div
